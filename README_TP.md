@@ -1,5 +1,5 @@
 ------------------------------------
-#### VERSION 1
+#### VERSION 2
 #### AMELIORATION: unicité des données 
 #### PREREQUIS: requetes sql,utilisation des dictionnaires
 ####  EXECUTION : python3 FileManager.py TP-INF351-data

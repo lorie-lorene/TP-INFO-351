@@ -1,4 +1,5 @@
 #Import Package
+####  EXECUTION : python3 FileManager.py TP-INF351-data
 import os
 import pymysql.cursors
 import sys
@@ -93,19 +94,19 @@ def get_or_create_auteur(connection, auteur):
     creer = False
     with connection.cursor() as cursor:
         # Verifier si l'auteur existe
-        sql = "SELECT * FROM `auteur` WHERE `nom_encode`=%s"
+        sql = "SELECT * FROM `Auteur` WHERE `nom_encode`=%s"
         cursor.execute(sql, (auteur,))
         result = cursor.fetchall()
         if result==None or result==():
             print("Enregistrement de l'auteur")
             #Si l'auteur n'existe pas dans la BD on le cree et on le recupere dans result
-            sql_auteur = "INSERT INTO `auteur` (`nom_encode`) VALUES (%s)"
+            sql_auteur = "INSERT INTO `Auteur` (`nom_encode`) VALUES (%s)"
             cursor.execute(sql_auteur, (auteur,))
             connection.commit()
             #On marque la creation à True
             creer=True
             #On recupere l'id de l'auteur cree
-            sql = "SELECT * FROM `auteur` WHERE `nom_encode`=%s"
+            sql = "SELECT * FROM `Auteur` WHERE `nom_encode`=%s"
             cursor.execute(sql, (auteur,))
             result = cursor.fetchone()
         else:
@@ -119,19 +120,19 @@ def get_or_create_affiliation(connection, ets, ville, pays):
     creer = False
     with connection.cursor() as cursor:
         # Verifier si l'auteur existe
-        sql = "SELECT * FROM `affiliation` WHERE `etablissement`=%s AND`ville`=%s AND`pays`=%s"
+        sql = "SELECT * FROM `Affiliation` WHERE `etablissement`=%s AND`ville`=%s AND`pays`=%s"
         cursor.execute(sql, (ets,ville,pays))
         result = cursor.fetchone()
         if result==None or result==():
             print("Enregistrement de l'affiliation")
             #Si l'auteur n'existe pas dans la BD on le cree et on le recupere dans result
-            sql_affiliation = "INSERT INTO `affiliation` (`etablissement`,`ville`,`pays`) VALUES (%s,%s,%s)"
+            sql_affiliation = "INSERT INTO `Affiliation` (`etablissement`,`ville`,`pays`) VALUES (%s,%s,%s)"
             cursor.execute(sql_affiliation, (ets,ville,pays))
             connection.commit()
             #On marque la creation à True
             creer=True
             #On recupere l'id de l'auteur cree
-            sql = "SELECT * FROM `affiliation` WHERE `etablissement`=%s AND `ville`=%s AND`pays`=%s"
+            sql = "SELECT * FROM `Affiliation` WHERE `etablissement`=%s AND `ville`=%s AND`pays`=%s"
             cursor.execute(sql, (ets,ville,pays))
             result = cursor.fetchone()
         else:
@@ -141,10 +142,10 @@ def get_or_create_affiliation(connection, ets, ville, pays):
 
 #Fonction create article
 def create_article(connection, titre):
-    sql_article = "INSERT INTO `article` (`titre_article`) VALUES (%s)"
+    sql_article = "INSERT INTO `Article` (`titre_article`) VALUES (%s)"
     cursor.execute(sql_article, (titre,))
     connection.commit()
-    sql = "SELECT `idarticle` FROM `article` WHERE `titre_article`=%s"
+    sql = "SELECT `idarticle` FROM `Article` WHERE `titre_article`=%s"
     cursor.execute(sql, (titre,))
     result = cursor.fetchone()
     print("Enregistrement de l'article")
